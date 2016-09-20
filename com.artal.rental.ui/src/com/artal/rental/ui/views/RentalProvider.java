@@ -9,8 +9,11 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.internal.AggregateWorkingSet;
 
+import com.artal.rental.ui.RentalUIActivator;
 import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
@@ -117,7 +120,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Color getForeground(Object element) {
 		if (element instanceof RentalAgency) {
-			return Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
+			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_RED);
 		} else if (element instanceof Customer) {
 			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_BLUE);
 		} else if (element instanceof Node) {
@@ -134,6 +137,25 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Color getBackground(Object element) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getImage(Object element) {
+		if (element instanceof RentalAgency) {
+			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_AGENCY);
+		}
+		else if (element instanceof Node) {
+			if (((Node) element).getLabel().equalsIgnoreCase(Node.CUST)) {
+				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_CUSTOMER);
+			}
+			else if (((Node) element).getLabel().equalsIgnoreCase(Node.LOC)) {
+				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_RENTAL);
+			}
+			else if (((Node) element).getLabel().equalsIgnoreCase(Node.RENTAL_OBJS)) {
+				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_OBJECT);
+			}
+		}
 		return null;
 	}
 }
