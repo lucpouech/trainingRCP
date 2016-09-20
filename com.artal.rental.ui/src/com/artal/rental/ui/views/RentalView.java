@@ -32,7 +32,6 @@ public class RentalView extends ViewPart implements ISelectionListener {
 	private Label rentedToLabel;
 
 	public RentalView() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -95,8 +94,6 @@ public class RentalView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
 	}
 	
 	public void setRental(Rental rental)
@@ -117,6 +114,5 @@ public class RentalView extends ViewPart implements ISelectionListener {
 				setRental((Rental) selected);
 			}
 		}
-		
 	}
 }
