@@ -21,5 +21,13 @@
             name="Rental Agency View">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.artal.rental.ui.RentalPerspective"
+            id="com.artal.rental.ui.RentalPerspective"
+            name="Rental Perspective">
+      </perspective>
+   </extension>
 
 </plugin>
