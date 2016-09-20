@@ -36,5 +36,4 @@ public class RentalAgencyView extends ViewPart {
 	public void setFocus() {
 
 	}
-
 }
