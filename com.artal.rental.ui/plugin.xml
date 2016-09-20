@@ -14,6 +14,12 @@
             name="Rental Property View"
             restorable="true">
       </view>
+      <view
+            category="com.artal.rental.ui.RentalCategory"
+            class="com.artal.rental.ui.views.RentalAgencyView"
+            id="com.artal.rental.ui.views.RentalAgencyView"
+            name="Rental Agency View">
+      </view>
    </extension>
 
 </plugin>

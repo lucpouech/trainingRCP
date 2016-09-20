@@ -39,7 +39,7 @@ public class RentalView extends ViewPart {
 		infoGroup.setText("Informations");
 		infoGroup.setLayout(new GridLayout(2, false));
 		
-		rentedObjectLabel = new Label(infoGroup, SWT.BORDER);
+		rentedObjectLabel = new Label(infoGroup, SWT.NONE);
 		GridData gd = new GridData();
 		gd.horizontalSpan = 2;
 		gd.grabExcessHorizontalSpace = true;
@@ -49,7 +49,7 @@ public class RentalView extends ViewPart {
 		rentedToLabel = new Label(infoGroup, SWT.NONE);
 		rentedToLabel.setText("Lou\u00E9 \u00E0:");
 		
-		customerLabel = new Label(infoGroup, SWT.BORDER);
+		customerLabel = new Label(infoGroup, SWT.NONE);
 		GridData gd2 = new GridData();
 		gd2.grabExcessHorizontalSpace = true;
 		gd2.horizontalAlignment = SWT.FILL;
@@ -84,7 +84,7 @@ public class RentalView extends ViewPart {
 	public void setRental(Rental rental)
 	{
 		rentedObjectLabel.setText(rental.getRentedObject().getName());
-		customerLabel.setText("Loué à: " + rental.getCustomer().getDisplayName());
+		customerLabel.setText(rental.getCustomer().getDisplayName());
 		startDate.setText(rental.getStartDate().toString());
 		endDate.setText(rental.getEndDate().toString());
 	}
