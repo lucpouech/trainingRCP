@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Adapter
+Bundle-SymbolicName: com.artal.rental.adapter;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.artal.rental.adapter.Activator
+Bundle-Vendor: ARTAL
+Require-Bundle: org.eclipse.core.runtime,
+ com.artal.rental.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
