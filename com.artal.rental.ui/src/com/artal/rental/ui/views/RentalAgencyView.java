@@ -3,10 +3,12 @@ package com.artal.rental.ui.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
@@ -48,6 +50,12 @@ public class RentalAgencyView extends ViewPart implements IPropertyChangeListene
 		treeViewer.expandAll();
 		
 		getSite().setSelectionProvider(treeViewer);
+		MenuManager menuManager = new MenuManager();
+		Menu menu = menuManager.createContextMenu(treeViewer.getControl());
+		treeViewer.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuManager, treeViewer);
+		
+		
 	}
 
 	@Override

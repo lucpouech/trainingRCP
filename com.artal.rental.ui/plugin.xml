@@ -49,5 +49,62 @@
             class="com.artal.rental.ui.pref.RentalPrefInit">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.artal.rental.ui.cmd.HelloWorld"
+            commandId="com.artal.rental.ui.cmd.HelloWorld">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            commandId="com.artal.rental.ui.cmd.HelloWorld"
+            id="com.artal.rental.ui.cmd.HelloWorld"
+            label="Hello World"
+            name="Hello World"
+            style="push">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="Hello World">
+            <command
+                  commandId="com.artal.rental.ui.cmd.HelloWorld"
+                  label="Hello World"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.views.ResourceNavigator?after=additions">
+         <menu
+               label="Hello World">
+            <command
+                  commandId="com.artal.rental.ui.cmd.HelloWorld"
+                  label="Hello World"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.artal.rental.ui.views.RentalAgencyView?after=additions">
+         <menu
+               id="com.artal.ui.views.RentalAgencyViewPopupMenu"
+               label="Hello World">
+            <command
+                  commandId="com.artal.rental.ui.cmd.HelloWorld"
+                  label="Hello World"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
 
 </plugin>
