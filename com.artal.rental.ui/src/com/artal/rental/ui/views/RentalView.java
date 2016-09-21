@@ -20,7 +20,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
-import com.artal.rental.core.RentalCoreActivator;
 import com.opcoach.training.rental.Rental;
 
 public class RentalView extends ViewPart implements ISelectionListener {
