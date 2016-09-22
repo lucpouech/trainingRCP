@@ -1,7 +1,8 @@
-package com.artal.rental.ui.views;
+package com.artal.rental.ui.e4.views;
 
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import javax.annotation.PostConstruct;
+
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -14,20 +15,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.ViewPart;
 
 import com.opcoach.training.rental.Rental;
 
-/**
- * 
- * @author pouech
- * @deprecated use E4 mofo!
- */
-public class RentalView extends ViewPart implements ISelectionListener {
+public class RentalView {
 
 	private Label rentedObjectLabel;
 
@@ -44,19 +35,21 @@ public class RentalView extends ViewPart implements ISelectionListener {
 	public RentalView() {
 	}
 
-	@Override
-	public void init(IViewSite site) throws PartInitException {
-		super.init(site);
-		site.getPage().addSelectionListener(this);
-	}
+	//E34: init
+//	@Override
+//	public void init(IViewSite site) throws PartInitException {
+//		super.init(site);
+//		site.getPage().addSelectionListener(this);
+//	}
+//
+	//E34: dispose
+//	@Override
+//	public void dispose() {
+//		getSite().getPage().removeSelectionListener(this);
+//		super.dispose();
+//	}
 
-	@Override
-	public void dispose() {
-		getSite().getPage().removeSelectionListener(this);
-		super.dispose();
-	}
-
-	@Override
+	@PostConstruct
 	public void createPartControl(Composite parent) {
 
 		parent.setLayout(new GridLayout(1, false));
@@ -107,7 +100,7 @@ public class RentalView extends ViewPart implements ISelectionListener {
 		setLabelAsDragSource(endDate);
 	}
 
-	@Override
+	@Focus
 	public void setFocus() {
 	}
 
@@ -118,15 +111,16 @@ public class RentalView extends ViewPart implements ISelectionListener {
 		endDate.setText(rental.getEndDate().toString());
 	}
 
-	@Override
-	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (selection instanceof IStructuredSelection) {
-			Object selected = ((IStructuredSelection) selection).getFirstElement();
-			if (selected instanceof Rental) {
-				setRental((Rental) selected);
-			}
-		}
-	}
+	// E34: selectionChanged
+//	@Override
+//	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+//		if (selection instanceof IStructuredSelection) {
+//			Object selected = ((IStructuredSelection) selection).getFirstElement();
+//			if (selected instanceof Rental) {
+//				setRental((Rental) selected);
+//			}
+//		}
+//	}
 
 	public void setLabelAsDragSource(final Label label) {
 		DragSource source = new DragSource(label, DND.DROP_MOVE | DND.DROP_COPY);

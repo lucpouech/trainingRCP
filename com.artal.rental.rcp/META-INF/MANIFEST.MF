@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Rcp
+Bundle-SymbolicName: com.artal.rental.rcp;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.artal.rental.rcp.Activator
+Bundle-Vendor: ARTAL
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.artal.rental.adapter;bundle-version="1.0.0",
+ com.artal.rental.core;bundle-version="1.0.0",
+ com.artal.rental.help;bundle-version="1.0.0",
+ com.artal.rental.ui;bundle-version="1.0.0",
+ com.artal.rental.ui.cmd;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
