@@ -16,6 +16,7 @@ public class RentalPrefInit extends AbstractPreferenceInitializer {
 	@Override
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = RentalUIActivator.getDefault().getPreferenceStore();
+		store.setDefault(RentalPalettePrefsPage.P_PALETTE, "com.artal.rental.ui.palette.DefaultPalette");
 		store.setDefault(RentalColorsPrefPage.P_OBJ_COLOR, StringConverter.asString(new RGB(100, 200, 250)));
 		store.setDefault(RentalColorsPrefPage.P_CUST_COLOR, StringConverter.asString(new RGB(250, 100, 40)));
 		store.setDefault(RentalColorsPrefPage.P_RENTAL_COLOR, StringConverter.asString(new RGB(50, 100, 200)));

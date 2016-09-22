@@ -1,7 +1,16 @@
 package com.artal.rental.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -17,11 +26,13 @@ public class RentalUIActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static RentalUIActivator plugin;
-	
+
 	public static final String IMG_CUSTOMER = "icons/Customers.png";
 	public static final String IMG_RENTAL = "icons/Rentals.png";
 	public static final String IMG_OBJECT = "icons/RentalObjects.png";
 	public static final String IMG_AGENCY = "icons/Agency.png";
+
+	private Map<String, PaletteDescriptor> paletteMap = new HashMap<String, PaletteDescriptor>();
 
 	/**
 	 * The constructor
@@ -38,6 +49,8 @@ public class RentalUIActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		// displayExt();
+		readPalette();
 	}
 
 	/*
@@ -67,5 +80,41 @@ public class RentalUIActivator extends AbstractUIPlugin {
 		reg.put(IMG_RENTAL, ImageDescriptor.createFromURL(b.getEntry(IMG_RENTAL)));
 		reg.put(IMG_OBJECT, ImageDescriptor.createFromURL(b.getEntry(IMG_OBJECT)));
 		reg.put(IMG_AGENCY, ImageDescriptor.createFromURL(b.getEntry(IMG_AGENCY)));
+	}
+
+	private void displayExt() {
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		for (IConfigurationElement e : reg.getConfigurationElementsFor("org.eclipse.ui.views")) {
+			if (e.getName().equalsIgnoreCase("view")) {
+				System.out.println("Plugin: " + e.getNamespaceIdentifier() + "\t\t\t View:" + e.getAttribute("name"));
+			}
+
+		}
+	}
+
+	private void readPalette() {
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		for (IConfigurationElement e : reg.getConfigurationElementsFor("com.artal.rental.ui.Palette")) {
+
+			try {
+				PaletteDescriptor pd = new PaletteDescriptor();
+				pd.setId(e.getAttribute("id"));
+				pd.setName(e.getAttribute("name"));
+
+				IColorProvider provider = (IColorProvider) e.createExecutableExtension("paletteClass");
+				pd.setColorProvider(provider);
+				
+				paletteMap.put(pd.getId(), pd);
+				
+			} catch (InvalidRegistryObjectException e1) {
+				System.out.println("InvalidRegistryObjectException occurred, just go kill yourself.");
+			} catch (CoreException e1) {
+				System.out.println("CoreException occurred, just go kill yourself.");
+			}
+		}
+	}
+
+	public Map<String, PaletteDescriptor> getPaletteMap() {
+		return paletteMap;
 	}
 }

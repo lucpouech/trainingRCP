@@ -4,20 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.jface.resource.ColorRegistry;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.internal.AggregateWorkingSet;
 
+import com.artal.rental.ui.PaletteDescriptor;
 import com.artal.rental.ui.RentalUIActivator;
-import com.artal.rental.ui.pref.RentalColorsPrefPage;
+import com.artal.rental.ui.pref.RentalPalettePrefsPage;
 import com.artal.rental.ui.pref.RentalPrefPage;
 import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.Rental;
@@ -67,19 +62,17 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 
 	@Override
 	public String getText(Object element) {
-		
+
 		if (element instanceof RentalAgency) {
 			return ((RentalAgency) element).getName();
 		} else if (element instanceof Customer) {
 			return ((Customer) element).getDisplayName();
 		} else if (element instanceof Node) {
-			boolean displayGroupObjCount = RentalUIActivator.getDefault().getPreferenceStore().getBoolean(RentalPrefPage.P_OBJ_GRP_COUNT);
-			if (displayGroupObjCount)
-			{
+			boolean displayGroupObjCount = RentalUIActivator.getDefault().getPreferenceStore()
+					.getBoolean(RentalPrefPage.P_OBJ_GRP_COUNT);
+			if (displayGroupObjCount) {
 				return ((Node) element).toString() + " (" + getChildren(element).length + ")";
-			}
-			else
-			{
+			} else {
 				return ((Node) element).toString();
 			}
 		} else if (element instanceof Rental) {
@@ -90,9 +83,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		return null;
 	}
 
-	private class Node {
-
-		
+	public class Node {
 
 		public static final String CUST = "Clients";
 		public static final String LOC = "Locations";
@@ -124,7 +115,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 				return rentalAgency.getCustomers().toArray();
 			}
 			if (label.equalsIgnoreCase(LOC)) {
-				return rentalAgency.getRentals().toArray();	
+				return rentalAgency.getRentals().toArray();
 			}
 			if (label.equalsIgnoreCase(RENTAL_OBJS)) {
 				return rentalAgency.getObjectsToRent().toArray();
@@ -135,7 +126,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		private RentalProvider getOuterType() {
 			return RentalProvider.this;
 		}
-		
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -173,56 +164,61 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 
 	@Override
 	public Color getForeground(Object element) {
-		
-		if (element instanceof RentalAgency) {
-			return getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_AGENCY_COLOR));
-		} else if (element instanceof Customer) {
-			return getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_CUST_COLOR));
-		} else if (element instanceof Node) {
-			return getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_NODE_COLOR));
-		} else if (element instanceof Rental) {
-			return getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_RENTAL_COLOR));
-		} else if (element instanceof RentalObject) {
-			return getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_OBJ_COLOR));
-		}
 
-		return null;
+		// if (element instanceof RentalAgency) {
+		// return
+		// getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_AGENCY_COLOR));
+		// } else if (element instanceof Customer) {
+		// return
+		// getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_CUST_COLOR));
+		// } else if (element instanceof Node) {
+		// return
+		// getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_NODE_COLOR));
+		// } else if (element instanceof Rental) {
+		// return
+		// getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_RENTAL_COLOR));
+		// } else if (element instanceof RentalObject) {
+		// return
+		// getAColor(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalColorsPrefPage.P_OBJ_COLOR));
+		// }
+
+		PaletteDescriptor pd = RentalUIActivator.getDefault().getPaletteMap()
+				.get(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalPalettePrefsPage.P_PALETTE));
+		return pd.getColorProvider().getForeground(element);
 	}
 
 	@Override
 	public Color getBackground(Object element) {
-		// TODO Auto-generated method stub
-		return null;
+		PaletteDescriptor pd = RentalUIActivator.getDefault().getPaletteMap()
+				.get(RentalUIActivator.getDefault().getPreferenceStore().getString(RentalPalettePrefsPage.P_PALETTE));
+		return pd.getColorProvider().getBackground(element);
 	}
 
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof RentalAgency) {
 			return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_AGENCY);
-		}
-		else if (element instanceof Node) {
+		} else if (element instanceof Node) {
 			if (((Node) element).getLabel().equalsIgnoreCase(Node.CUST)) {
 				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_CUSTOMER);
-			}
-			else if (((Node) element).getLabel().equalsIgnoreCase(Node.LOC)) {
+			} else if (((Node) element).getLabel().equalsIgnoreCase(Node.LOC)) {
 				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_RENTAL);
-			}
-			else if (((Node) element).getLabel().equalsIgnoreCase(Node.RENTAL_OBJS)) {
+			} else if (((Node) element).getLabel().equalsIgnoreCase(Node.RENTAL_OBJS)) {
 				return RentalUIActivator.getDefault().getImageRegistry().get(RentalUIActivator.IMG_OBJECT);
 			}
 		}
 		return null;
 	}
-	
-	private Color getAColor(String rgbKey)
-	{
-		ColorRegistry colorRegistry = JFaceResources.getColorRegistry();
-		Color col = colorRegistry.get(rgbKey);
-		if (col == null)
-		{
-			colorRegistry.put(rgbKey, StringConverter.asRGB(rgbKey));
-			col = colorRegistry.get(rgbKey);
-		}
-		return col;
-	}
+
+	// private Color getAColor(String rgbKey)
+	// {
+	// ColorRegistry colorRegistry = JFaceResources.getColorRegistry();
+	// Color col = colorRegistry.get(rgbKey);
+	// if (col == null)
+	// {
+	// colorRegistry.put(rgbKey, StringConverter.asRGB(rgbKey));
+	// col = colorRegistry.get(rgbKey);
+	// }
+	// return col;
+	// }
 }

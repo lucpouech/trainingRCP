@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="Palette" name="Palette" schema="schema/Palette.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -44,9 +45,15 @@
       </page>
       <page
             category="com.artal.rental.ui.pref.RentalPrefPage"
+            class="com.artal.rental.ui.pref.RentalPalettePrefsPage"
+            id="com.artal.rental.ui.pref.RentalPalettePrefsPage"
+            name="Palettes">
+      </page>
+      <page
+            category="com.artal.rental.ui.pref.RentalPalettePrefsPage"
             class="com.artal.rental.ui.pref.RentalColorsPrefPage"
             id="com.artal.rental.ui.pref.RentalColorsPrefPage"
-            name="Color">
+            name="DefaultColor">
       </page>
    </extension>
    <extension
@@ -111,6 +118,19 @@
             </command>
          </menu>
       </menuContribution>
+   </extension>
+   <extension
+         point="com.artal.rental.ui.Palette">
+      <palette
+            id="com.artal.rental.ui.palette.DefaultPalette"
+            name="DefaultPalette"
+            paletteClass="com.artal.rental.ui.palette.DefaultPalette">
+      </palette>
+      <palette
+            id="com.artal.rental.ui.UglyPalette"
+            name="UglyPalette"
+            paletteClass="com.artal.rental.ui.palette.UglyPalette">
+      </palette>
    </extension>
 
 </plugin>
