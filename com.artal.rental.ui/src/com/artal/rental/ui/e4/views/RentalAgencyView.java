@@ -1,23 +1,21 @@
-package com.artal.rental.ui.views;
+package com.artal.rental.ui.e4.views;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.util.IPropertyChangeListener;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.ViewPart;
 
 import com.artal.rental.core.RentalCoreActivator;
-import com.artal.rental.ui.RentalUIActivator;
+import com.artal.rental.ui.views.RentalProvider;
 import com.opcoach.training.rental.RentalAgency;
 
-public class RentalAgencyView extends ViewPart implements IPropertyChangeListener {
+public class RentalAgencyView {
 
 	private TreeViewer treeViewer;
 
@@ -25,19 +23,21 @@ public class RentalAgencyView extends ViewPart implements IPropertyChangeListene
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void init(IViewSite site) throws PartInitException {
-		super.init(site);
-		RentalUIActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
-	}
+	// E34
+//	@Override
+//	public void init(IViewSite site) throws PartInitException {
+//		super.init(site);
+//		RentalUIActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+//	}
+
+	// E34
+//	@Override
+//	public void dispose() {
+//		RentalUIActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+//		super.dispose();
+//	}
 	
-	@Override
-	public void dispose() {
-		RentalUIActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
-		super.dispose();
-	}
-	
-	@Override
+	@PostConstruct
 	public void createPartControl(Composite parent) {
 		treeViewer = new TreeViewer(parent);
 		RentalProvider rp = new RentalProvider();
@@ -49,22 +49,25 @@ public class RentalAgencyView extends ViewPart implements IPropertyChangeListene
 		treeViewer.setInput(agencies);
 		treeViewer.expandAll();
 		
-		getSite().setSelectionProvider(treeViewer);
+		// E34
+//		getSite().setSelectionProvider(treeViewer);
 		MenuManager menuManager = new MenuManager();
 		Menu menu = menuManager.createContextMenu(treeViewer.getControl());
 		treeViewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuManager, treeViewer);
+		// E34
+//		getSite().registerContextMenu(menuManager, treeViewer);
 		
 		
 	}
 
-	@Override
+	@Focus
 	public void setFocus() {
 
 	}
 
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		treeViewer.refresh();
-	}
+	// E34
+//	@Override
+//	public void propertyChange(PropertyChangeEvent event) {
+//		treeViewer.refresh();
+//	}
 }

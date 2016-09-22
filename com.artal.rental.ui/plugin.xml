@@ -3,25 +3,6 @@
 <plugin>
    <extension-point id="Palette" name="Palette" schema="schema/Palette.exsd"/>
    <extension
-         point="org.eclipse.ui.views">
-      <category
-            id="com.artal.rental.ui.RentalCategory"
-            name="Rental">
-      </category>
-      <view
-            category="com.artal.rental.ui.RentalCategory"
-            class="com.artal.rental.ui.views.RentalAgencyView"
-            id="com.artal.rental.ui.views.RentalAgencyView"
-            name="Rental Agency View">
-      </view>
-      <view
-            category="com.artal.rental.ui.RentalCategory"
-            class="com.artal.rental.ui.views.CustomerView"
-            id="com.artal.rental.ui.views.CustomerView"
-            name="Customer View">
-      </view>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="com.artal.rental.ui.RentalPerspective"
