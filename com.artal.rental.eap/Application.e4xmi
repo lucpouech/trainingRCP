@@ -3,10 +3,14 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.window.main" label="Eclipse 4 RCP Application" width="500" height="400">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.perspective.sample">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.partsashcontainer.sample">
-          <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.partstack.sample">
-            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.part.RentalView" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.e4.views.RentalView" label="Rental View"/>
-            <children xsi:type="basic:Part" xmi:id="_ocFmQIDTEea-Ot-rp4YzyA" elementId="com.artal.rental.eap.part.CustomerView" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.e4.views.CustomerView" label="Customer View"/>
+        <children xsi:type="basic:PartSashContainer" xmi:id="_9JZtYIDUEea-Ot-rp4YzyA" elementId="com.artal.rental.eap.partsashcontainer.0" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_Qxyl0IFwEeaykbHAFkIQ_g" elementId="com.artal.rental.eap.partsashcontainer.1">
+            <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.partstack.sample">
+              <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="com.artal.rental.eap.part.RentalView" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.e4.views.RentalView" label="Rental View"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_d3qP4IFwEeaykbHAFkIQ_g" elementId="com.artal.rental.eap.partstack.1">
+              <children xsi:type="basic:Part" xmi:id="_ocFmQIDTEea-Ot-rp4YzyA" elementId="com.artal.rental.eap.part.CustomerView" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.e4.views.CustomerView" label="Customer View"/>
+            </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_EFDtYIDUEea-Ot-rp4YzyA" elementId="com.artal.rental.eap.partstack.0">
             <children xsi:type="basic:Part" xmi:id="_A7LyYIDUEea-Ot-rp4YzyA" elementId="com.artal.rental.eap.part.RentalAgencyView" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.e4.views.RentalAgencyView" label="Rental Agency View"/>
@@ -56,4 +60,5 @@
   <addons xmi:id="_6wlLdsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_6wlLd8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_6wlLeMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_s1FZ0IFiEeaykbHAFkIQ_g" elementId="com.artal.rental.eap.addon.0" contributionURI="bundleclass://com.artal.rental.ui/com.artal.rental.ui.RentalAddon"/>
 </application:Application>

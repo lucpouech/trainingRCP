@@ -4,19 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 
 import com.artal.rental.core.RentalCoreActivator;
 import com.artal.rental.ui.views.RentalProvider;
+import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 
 public class RentalAgencyView {
 
+	@Inject private ESelectionService selectionService;
+	
 	private TreeViewer treeViewer;
 
 	public RentalAgencyView() {
@@ -57,7 +68,7 @@ public class RentalAgencyView {
 		// E34
 //		getSite().registerContextMenu(menuManager, treeViewer);
 		
-		
+		provideSelection();
 	}
 
 	@Focus
@@ -70,4 +81,18 @@ public class RentalAgencyView {
 //	public void propertyChange(PropertyChangeEvent event) {
 //		treeViewer.refresh();
 //	}
+	
+	private void provideSelection()
+	{
+		treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection sel = (IStructuredSelection) event.getSelection();
+				selectionService.setSelection(sel.size() == 1 ? sel.getFirstElement() : sel.toArray());
+			}
+		});
+	}
+	
+
 }

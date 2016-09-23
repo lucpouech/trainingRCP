@@ -1,8 +1,12 @@
 package com.artal.rental.ui.e4.views;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -15,24 +19,25 @@ public class CustomerView {
 
 	public static final String ID = "com.artal.rental.ui.views.CustomerView"; //$NON-NLS-1$
 	private Label lblCust;
+	
+	// E34
+	// @Override
+	// public void init(IViewSite site) throws PartInitException {
+	// super.init(site);
+	// site.getPage().addSelectionListener(this);
+	// }
+	//
+	// @Override
+	// public void dispose() {
+	// getSite().getPage().removeSelectionListener(this);
+	// super.dispose();
+	// }
 
-	public CustomerView() {
-	}
-// E34
-//	@Override
-//	public void init(IViewSite site) throws PartInitException {
-//		super.init(site);
-//		site.getPage().addSelectionListener(this);
-//	}
-//
-//	@Override
-//	public void dispose() {
-//		getSite().getPage().removeSelectionListener(this);
-//		super.dispose();
-//	}
-
-	@PostConstruct
-	public void createPartControl(Composite parent) {
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	@Inject
+	public void CustomerView(Composite parent) {
 
 		// parent.setLayout(new GridLayout(1));
 
@@ -65,14 +70,32 @@ public class CustomerView {
 	}
 
 	// E34
-//	@Override
-//	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-//		if (selection instanceof IStructuredSelection) {
-//			Object selected = ((IStructuredSelection) selection).getFirstElement();
-//			if (selected != null) {
-//				Customer c = Platform.getAdapterManager().getAdapter(selected, Customer.class);
-//				setCustomer(c);
-//			}
-//		}
-//	}
+	// @Override
+	// public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+	// if (selection instanceof IStructuredSelection) {
+	// Object selected = ((IStructuredSelection) selection).getFirstElement();
+	// if (selected != null) {
+	// Customer c = Platform.getAdapterManager().getAdapter(selected,
+	// Customer.class);
+	// setCustomer(c);
+	// }
+	// }
+	// }
+
+	@Inject
+	@Optional
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Customer c) {
+		setCustomer(c);
+	}
+
+	@Inject
+	@Optional
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selection) {
+		if (selection != null) {
+			Object selected = selection[0];
+			if (selected instanceof Customer) {
+				setCustomer((Customer) selected);
+			}
+		}
+	}
 }
