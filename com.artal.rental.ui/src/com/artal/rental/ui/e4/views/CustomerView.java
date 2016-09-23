@@ -1,10 +1,10 @@
 package com.artal.rental.ui.e4.views;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.adapter.Adapter;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
@@ -19,7 +19,7 @@ public class CustomerView {
 
 	public static final String ID = "com.artal.rental.ui.views.CustomerView"; //$NON-NLS-1$
 	private Label lblCust;
-	
+
 	// E34
 	// @Override
 	// public void init(IViewSite site) throws PartInitException {
@@ -33,11 +33,8 @@ public class CustomerView {
 	// super.dispose();
 	// }
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
 	@Inject
-	public void CustomerView(Composite parent) {
+	public CustomerView(Composite parent) {
 
 		// parent.setLayout(new GridLayout(1));
 
@@ -90,12 +87,18 @@ public class CustomerView {
 
 	@Inject
 	@Optional
-	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selection) {
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object o, Adapter adapter) {
+		if (o != null) {
+			setCustomer(adapter.adapt(o, Customer.class));
+		}
+	}
+
+	@Inject
+	@Optional
+	public void receiveSelection(@Named(IServiceConstants.ACTIVE_SELECTION) Object[] selection, Adapter adapter) {
 		if (selection != null) {
 			Object selected = selection[0];
-			if (selected instanceof Customer) {
-				setCustomer((Customer) selected);
-			}
+			setCustomer(adapter.adapt(selected, Customer.class));
 		}
 	}
 }

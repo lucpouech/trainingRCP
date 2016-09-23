@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  com.artal.rental.core;bundle-version="1.0.0",
  org.eclipse.e4.ui.di,
- org.eclipse.e4.core.contexts
+ org.eclipse.e4.core.contexts,
+ org.eclipse.e4.core.services
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: com.artal.rental.ui,

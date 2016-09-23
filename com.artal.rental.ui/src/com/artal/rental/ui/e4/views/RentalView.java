@@ -1,6 +1,5 @@
 package com.artal.rental.ui.e4.views;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -59,7 +58,7 @@ public class RentalView {
 	 * @wbp.parser.entryPoint
 	 */
 	@Inject
-	public void RentalView(Composite parent, RentalAgency agency) {
+	public RentalView(Composite parent, RentalAgency agency) {
 
 		parent.setLayout(new GridLayout(1, false));
 
